@@ -10,8 +10,7 @@ namespace cs2asm
             c.Compile("..\\Test\\bin\\Debug\\netcoreapp2.0\\Test.dll");
 
             c.WriteToFile("out.asm");
-
-            Console.ReadKey(false);
+            
         }
     }
 }

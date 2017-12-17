@@ -6,8 +6,13 @@ namespace Test
     {
         static void Main()
         {
-            var terminal = (byte*) 0xB8000;
-            terminal[0] = (byte) 'A';
+            PintChar('A', 0);
+        }
+
+        static void PintChar(char c, int i)
+        {
+            var terminal = (byte*)0xB8000;
+            terminal[0] = (byte)c;
         }
     }
 }

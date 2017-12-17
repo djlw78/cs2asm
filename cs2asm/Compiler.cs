@@ -52,10 +52,17 @@ namespace cs2asm
             }
         }
 
+        private string NormaliseName(string s)
+        {
+            return s.ToLower().Replace(" ", "~").Replace("::", "#").Replace("(", "@").Replace(")", "").Replace(",", "$");
+        }
+
         public void CompileType(TypeDefinition td)
         {
             Writer.Comment(td.FullName);
             Writer.Comment("");
+
+
 
             foreach (var propertyDefinition in td.Properties)
             {
@@ -78,6 +85,7 @@ namespace cs2asm
 
         public void CompileMethod(MethodDefinition md)
         {
+            Writer.Label(NormaliseName(md.FullName));
             Writer.Comment("");
             Writer.Comment("");
             foreach (var bodyInstruction in md.Body.Instructions)

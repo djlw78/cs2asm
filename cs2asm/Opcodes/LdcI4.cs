@@ -9,7 +9,6 @@ namespace cs2asm.Opcodes
     {
         public override bool IsMe(Instruction c)
         {
-
             if (c.OpCode == OpCodes.Ldc_I4)
             {
                 return true;
