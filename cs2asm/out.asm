@@ -43,17 +43,5 @@ jmp system.void~test.program#pintchar@system.char$system.int32_ret
 system.void~test.program#pintchar@system.char$system.int32_ret:
 ret
 ;System.Void Test.Program::.ctor()
-system.void~test.program#.ctor@:
-;
-;
-push ebp
-mov ebp, esp
-sub esp, 32
-mov eax, [ebp+4]
-push eax
-call system.void~system.object#.ctor@
-jmp system.void~test.program#.ctor@_ret
-system.void~test.program#.ctor@_ret:
-ret
 
 SECTION .data

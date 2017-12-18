@@ -85,6 +85,8 @@ namespace cs2asm
 
         public void CompileMethod(MethodDefinition md)
         {
+            if(md.IsConstructor) return;
+
             Writer.Label(NormaliseName(md.FullName));
             Writer.Comment("");
             Writer.Comment("");
