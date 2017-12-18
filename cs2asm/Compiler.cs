@@ -52,7 +52,7 @@ namespace cs2asm
             }
         }
 
-        private string NormaliseName(string s)
+        public static string NormaliseName(string s)
         {
             return s.ToLower().Replace(" ", "~").Replace("::", "#").Replace("(", "@").Replace(")", "")
                 .Replace(",", "$");
@@ -101,7 +101,7 @@ namespace cs2asm
                 {
                     if (opcode.IsMe(bodyInstruction))
                     {
-                        opcode.Emit(bodyInstruction, Writer);
+                        if(md.HasBody) opcode.Emit(md, bodyInstruction, Writer);
                         found = true;
                         break;
                     }
@@ -114,6 +114,7 @@ namespace cs2asm
                 }
             }
 
+            Writer.Label(NormaliseName(md.FullName) + "_ret");
 
             Writer.Ret();
         }
@@ -122,6 +123,90 @@ namespace cs2asm
         public void WriteToFile(string file)
         {
             File.WriteAllText(file, Writer.ToString());
+        }
+
+        public static int CalculateNativeSize(NativeType marshalInfoNativeType)
+        {
+
+            switch (marshalInfoNativeType)
+            {
+                case NativeType.None:
+                    return 0;
+                case NativeType.Boolean:
+                    return 1;
+                case NativeType.I1:
+                    return 1;
+                case NativeType.U1:
+                    return 1;
+                case NativeType.I2:
+                    return 2;
+                case NativeType.U2:
+                    return 2;
+                case NativeType.I4:
+                    return 4;
+                case NativeType.U4:
+                    return 4;
+                case NativeType.I8:
+                    return 8;
+                case NativeType.U8:
+                    return 8;
+                case NativeType.R4:
+                    return 4;
+                case NativeType.R8:
+                    return 8;
+                case NativeType.LPStr:
+                    return 4;
+                case NativeType.Int:
+                    return 4;
+                case NativeType.UInt:
+                    return 4;
+                case NativeType.Func:
+                    return 4;
+                case NativeType.Array:
+                    return 4;
+                case NativeType.Currency:
+                    break;
+                case NativeType.BStr:
+                    break;
+                case NativeType.LPWStr:
+                    break;
+                case NativeType.LPTStr:
+                    break;
+                case NativeType.FixedSysString:
+                    break;
+                case NativeType.IUnknown:
+                    break;
+                case NativeType.IDispatch:
+                    break;
+                case NativeType.Struct:
+                    break;
+                case NativeType.IntF:
+                    break;
+                case NativeType.SafeArray:
+                    break;
+                case NativeType.FixedArray:
+                    break;
+                case NativeType.ByValStr:
+                    break;
+                case NativeType.ANSIBStr:
+                    break;
+                case NativeType.TBStr:
+                    break;
+                case NativeType.VariantBool:
+                    break;
+                case NativeType.ASAny:
+                    break;
+                case NativeType.LPStruct:
+                    break;
+                case NativeType.CustomMarshaler:
+                    break;
+                case NativeType.Error:
+                    break;
+                case NativeType.Max:
+                    break;
+            }
+
+            return 0;
         }
     }
 }
