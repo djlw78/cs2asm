@@ -31,10 +31,14 @@ push 753664
 ;IL_0006: conv.i
 pop eax
 mov [ebp-4], eax
-;IL_0008: ldloc.0
-;IL_0009: ldarg.0
+mov eax, [ebp-4]
+push eax
+mov eax, [ebp+8]
+push eax
 ;IL_000a: conv.u1
-;IL_000b: stind.i1
+pop eax
+pop ebx
+mov [eax], ebx
 jmp system.void~test.program#pintchar@system.char$system.int32_ret
 system.void~test.program#pintchar@system.char$system.int32_ret:
 ret
@@ -45,7 +49,8 @@ system.void~test.program#.ctor@:
 push ebp
 mov ebp, esp
 sub esp, 32
-;IL_0000: ldarg.0
+mov eax, [ebp+4]
+push eax
 call system.void~system.object#.ctor@
 jmp system.void~test.program#.ctor@_ret
 system.void~test.program#.ctor@_ret:
