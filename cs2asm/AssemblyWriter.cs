@@ -105,7 +105,7 @@ namespace cs2asm
             sb.AppendLine("mov " + valueA + ", " + valueB);
         }
 
-        public void Sub(string valueA, string valueB)
+        public void Sub(string valueA, int valueB)
         {
             sb.AppendLine("sub " + valueA + ", " + valueB);
         }

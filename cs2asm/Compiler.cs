@@ -22,7 +22,7 @@ namespace cs2asm
             {
                 if (type.BaseType == typeof(Opcode))
                 {
-                    Opcodes.Add((Opcode)Activator.CreateInstance(type));
+                    Opcodes.Add((Opcode) Activator.CreateInstance(type));
                 }
             }
         }
@@ -54,14 +54,14 @@ namespace cs2asm
 
         private string NormaliseName(string s)
         {
-            return s.ToLower().Replace(" ", "~").Replace("::", "#").Replace("(", "@").Replace(")", "").Replace(",", "$");
+            return s.ToLower().Replace(" ", "~").Replace("::", "#").Replace("(", "@").Replace(")", "")
+                .Replace(",", "$");
         }
 
         public void CompileType(TypeDefinition td)
         {
             Writer.Comment(td.FullName);
             Writer.Comment("");
-
 
 
             foreach (var propertyDefinition in td.Properties)
@@ -88,9 +88,14 @@ namespace cs2asm
             Writer.Label(NormaliseName(md.FullName));
             Writer.Comment("");
             Writer.Comment("");
+
+            Writer.Push("ebp");
+            Writer.Mov("ebp", "esp");
+            Writer.Sub("esp", md.Body.MaxStackSize * 4);
+
+
             foreach (var bodyInstruction in md.Body.Instructions)
             {
-               
                 bool found = false;
                 foreach (var opcode in Opcodes)
                 {
@@ -108,6 +113,9 @@ namespace cs2asm
                     Console.WriteLine($"Found Missing Opcode: {bodyInstruction.ToString()}");
                 }
             }
+
+
+            Writer.Ret();
         }
 
 
