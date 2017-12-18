@@ -3,3 +3,7 @@ cs2asm is a operating system development tool that compiles CS files to Assembly
 
 # The Process
 The process is simple... We are creating our compiler in c#, the compiler will take a c# file and convert it into CIL codes, and from there we will convert the CIL codes into Assembly code.
+
+# Active Contributors
+* Myvar
+* djlw78
